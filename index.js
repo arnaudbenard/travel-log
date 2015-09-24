@@ -9,6 +9,7 @@ const app = koa();
 
 const logger = require('koa-logger');
 const route = require('koa-route');
+const serve = require('koa-static');
 
 /**
  * Load .env file
@@ -27,6 +28,7 @@ const index = require('./controllers/index');
  */
 
 app.use(logger());
+app.use(serve(__dirname + '/public'));
 
 /**
  * Routes

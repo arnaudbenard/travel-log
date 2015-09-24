@@ -1,4 +1,59 @@
-I AM THE INDEX
-<% events.forEach(function(event) { %>
-    <li><%= event.summary %> ( <%= event.start %> - <%= event.end %> )</li>
-<% }); %>
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Where is Arnaud</title>
+  <meta name="description" content="Where is Arnaud?">
+  <meta name="author" content="Arnaud Benard">
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 100%; }
+    </style>
+  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Old+Standard:400,800">
+  <link rel="stylesheet" href="styles/normalize.css">
+  <link href="http://d2v52k3cl9vedd.cloudfront.net/basscss/7.0.4/basscss.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+  <div class="full-height">
+    <div class="col col-6 full-height px3">
+      <h1>Trips</h1>
+
+      <h2>Present</h2>
+      <ul class="list-reset border-top">
+        <% currentEvents.forEach(function (event) { %>
+          <% include partials/event-item %>
+        <% }); %>
+      </ul>
+
+      <h2>Future</h2>
+
+      <ul class="list-reset border-top">
+        <% futureEvents.forEach(function (event) { %>
+          <% include partials/event-item %>
+        <% }); %>
+      </ul>
+
+    </div>
+    <div class="col col-6 full-height">
+      <div id="map" class="full-height"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    window.data = {
+      currentEvents: <%- JSON.stringify(currentEvents) %> || [],
+      futureEvents: <%- JSON.stringify(futureEvents) %> || [],
+      events: <%- JSON.stringify(events) %> || [],
+      map: {}
+    };
+  </script>
+  <script type="text/javascript" src="scripts/google-maps.js"></script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI2yabfRCH6nu_X41Whuq0U3Oc3-GWYVY&callback=initMap">
+  </script>
+</body>
+</html>

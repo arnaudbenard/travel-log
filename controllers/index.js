@@ -18,7 +18,10 @@ module.exports = function * () {
   let events = yield gcal.events();
   events = yield events.map(addCoordinates);
   events = events.map(event => new CalendarEvent(event));
-  this.body = yield render('index', {events});
+
+  const currentEvents = events.filter((event) => event.isCurrent);
+  const futureEvents = events.filter((event) => !event.isCurrent);
+  this.body = yield render('index', {events, currentEvents, futureEvents});
 };
 
 /**

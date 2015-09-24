@@ -5,6 +5,7 @@
  */
 
 const humanDate = require('../lib/human-date');
+const todayInRange = require('../lib/today-in-range');
 
 /**
  * Expose CalendarEvent Class
@@ -19,4 +20,5 @@ function CalendarEvent (event) {
   this.location = event.location;
   this.longitude = event.longitude;
   this.latitude = event.latitude;
+  this.isCurrent = todayInRange(event.start.date, event.end.date);
 }
