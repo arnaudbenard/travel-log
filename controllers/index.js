@@ -19,9 +19,11 @@ module.exports = function * () {
   events = yield events.map(addCoordinates);
   events = events.map(event => new CalendarEvent(event));
 
-  const currentEvents = events.filter((event) => event.isCurrent);
-  const futureEvents = events.filter((event) => !event.isCurrent);
-  this.body = yield render('index', {events, currentEvents, futureEvents});
+  this.body = yield render('index', {
+    events,
+    currentEvents: events.filter((event) => event.isCurrent),
+    futureEvents: events.filter((event) => !event.isCurrent)
+  });
 };
 
 /**
