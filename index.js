@@ -15,7 +15,9 @@ const serve = require('koa-static');
  * Load .env file
  */
 
-require('dotenv').load();
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').load();
+}
 
 /**
  * Controllers
