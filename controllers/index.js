@@ -8,6 +8,7 @@ const extend = require('extend');
 const gcal = require('../lib/google-calendar');
 const render = require('../lib/render');
 const geocode = require('../lib/geocode');
+const localTime = require('../lib/local-time');
 const CalendarEvent = require('../models/calendar-event');
 
 /**
@@ -15,16 +16,26 @@ const CalendarEvent = require('../models/calendar-event');
  */
 
 module.exports = function * () {
-  let events = yield gcal.events();
-  events = yield events.map(addCoordinates);
-  events = events.map(event => new CalendarEvent(event));
+  let events = yield fetchEvents();
+  const currentEvents = events.filter((event) => event.isCurrent);
+  const futureEvents = events.filter((event) => !event.isCurrent);
 
   this.body = yield render('index', {
     events,
-    currentEvents: events.filter((event) => event.isCurrent),
-    futureEvents: events.filter((event) => !event.isCurrent)
+    currentEvents,
+    futureEvents
   });
 };
+
+/**
+ * Fetch events from google calendar
+ */
+
+function * fetchEvents () {
+  let events = yield gcal.events();
+  events = yield events.map(addCoordinates);
+  return events.map(event => new CalendarEvent(event));
+}
 
 /**
  * Add longitude and latitude to the event
@@ -37,8 +48,10 @@ function addCoordinates (event) {
 
   return geocode(event.location || event.summary)
   .then(data => {
-    let latitude = data.length > 0 ? data[0].latitude : '';
-    let longitude = data.length > 0 ? data[0].longitude : '';
-    return extend(event, {latitude, longitude});
+    const location = data.length > 0 ? data[0] : {};
+    return extend(event, {
+      latitude: location.latitude,
+      longitude: location.longitude
+    });
   });
 }
