@@ -26,6 +26,15 @@ h1 {
 
   #content-container {
     width: 100%;
+    padding: 2rem;
+  }
+
+  .date {
+    float: left;
+  }
+
+  .box-time {
+    padding-top: 7px;
   }
 }
 
