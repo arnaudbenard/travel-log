@@ -8,7 +8,7 @@ const extend = require('extend');
 const gcal = require('../lib/google-calendar');
 const render = require('../lib/render');
 const geocode = require('../lib/geocode');
-const localTime = require('../lib/local-time');
+const timeline = require('../lib/timeline');
 const CalendarEvent = require('../models/calendar-event');
 
 /**
@@ -17,14 +17,7 @@ const CalendarEvent = require('../models/calendar-event');
 
 module.exports = function * () {
   let events = yield fetchEvents();
-  const currentEvents = events.filter((event) => event.isCurrent);
-  const futureEvents = events.filter((event) => !event.isCurrent);
-
-  this.body = yield render('index', {
-    events,
-    currentEvents,
-    futureEvents
-  });
+  this.body = yield render('index', timeline(events));
 };
 
 /**

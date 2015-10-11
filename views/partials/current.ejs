@@ -1,0 +1,12 @@
+<li class="col col-12 box" onclick="showMarker(this)" data-lat="<%= currentEvent.latitude %>" data-lng="<%= currentEvent.longitude %>">
+  <div class="box-content left">
+    <div class="h2 inline-block"><%= currentEvent.summary %></div>
+    <div class="box-time inline-block right">Local <%= currentEvent.localTime %></div>
+    <div class="date">
+      From <%= currentEvent.startDate %> to <%= currentEvent.endDate %>
+    </div>
+    <div class="box-difference">
+      <%= currentEvent.daysLeft %>
+    </div>
+  </div>
+</li>

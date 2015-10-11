@@ -1,7 +1,97 @@
+html,
+body {
+  height: 100%;
+}
+
 .full-height {
     height: 100%;
 }
 
-.pointer {
-    cursor: pointer;
+
+h1 {
+  border-bottom: 1px solid #DCDCDC;
+  font-size: 36px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.h1--next {
+  margin-bottom: 0;
+}
+
+@media (max-width: 800px) {
+  #map-container {
+    display: none!important;
+  }
+
+  #content-container {
+    width: 100%;
+  }
+}
+
+/**
+ * Box
+ */
+
+.box-img {
+  height: 100px;
+  width: 100px;
+  background-size: cover;
+  background-image: url(/images/bg.jpeg);
+}
+
+.box-content {
+  width: 100%;
+  cursor: pointer;
+}
+
+.box-content .h2 {
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.date,
+.box-difference {
+  color: #A8A8A8;
+  font-size: 18px;
+}
+
+.box-time {
+  color: black;
+  font-style: italic;
+}
+
+.item {
+  padding: 1rem 0;
+  cursor: pointer;
+}
+
+.item-title {
+  font-size: 18px;
+  color: #000000;
+}
+
+.contact-form {
+  background: #57B8FF;
+  padding: 2rem;
+  color: white;
+  margin: 2rem 0;
+}
+
+.contact-form h2 {
+  margin-top: 0;
+}
+
+.contact-form p {
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.contact-form .btn {
+  background-color: white;
+  color: black;
+}
+
+#mce-EMAIL {
+  color: black;
 }

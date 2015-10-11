@@ -1,7 +1,6 @@
 function initMap() {
-  var currentEvent = window.data.currentEvents[0];
+  var currentEvent = window.data.currentEvent;
   var events = window.data.events;
-
   window.data.map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: currentEvent.latitude,

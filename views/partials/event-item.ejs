@@ -1,11 +1,8 @@
 <li onclick="showMarker(this)" data-lat="<%= event.latitude %>" data-lng="<%= event.longitude %>">
-  <div class="border-bottom py2 pointer">
-    <span class="caps">
+  <div class="item border-bottom">
+    <span class="item-title">
       <%= event.summary %>
     </span>
-    <span class="caps italic">
-        - <%= event.localTime %>
-    </span>
-    <span class="right"><%= event.start %> - <%= event.end %></span>
+    <span class="right date"><%= event.startDate %> - <%= event.endDate %></span>
   </div>
 </li>
